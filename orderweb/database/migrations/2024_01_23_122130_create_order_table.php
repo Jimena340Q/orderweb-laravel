@@ -22,7 +22,6 @@ return new class extends Migration
             $table->foreignId('causal_id')->nullable()->constrained('causal')
                     ->onDelete('cascade')
                     ->onUpdate('cascade');
-
             $table->timestamps();
         });
     }
