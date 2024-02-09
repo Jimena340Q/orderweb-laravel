@@ -21,9 +21,9 @@ class TestActivitySeeder extends Seeder
         $activity = new Activity();
         $activity->description = 'Test Activity';
         $activity->hours = 10;
-        $activity ->technician_id = $technician->document;
+        $activity->technician_id = $technician->document;
         $activity->type_id = $typeActivity->id;
         $activity->save(); 
-
+        
     }
 }
