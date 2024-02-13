@@ -11,7 +11,7 @@
                     <div class="col-lg-12 mb-4">
                         <label for="description">Descripción</label>
                         <input type="text" class="form-control"
-                        id="description" name="description" required>
+                            id="description" name="description" required>
                     </div>
                 </div>
                 <div class="row form-group">
@@ -23,7 +23,7 @@
                     </div>
                     <div class="col-lg-6 mb-4">
                         <a href="{{ route('type_activity.index') }}" class="btn btn-secondary btn-block">
-                            Cancelar
+                                Cancelar
                         </a>
 
                     </div>

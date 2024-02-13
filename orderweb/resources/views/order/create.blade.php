@@ -5,7 +5,7 @@
     @include('templates.messages')
     <div class="row">
         <div class="col-lg-12 mb-4">
-            <form action="#" method="POST">
+            <form action="{{ route('order.store') }}" method="POST">
                 @csrf
                 <div class="row form-group">
                     <div class="col-lg-4 mb-4">
@@ -14,9 +14,9 @@
                         id="legalization_date" name="legalization_date" required>
                     </div>
                     <div class="col-lg-4 mb-4">
-                        <label for="address">Dirección</label>
+                        <label for="addres">Dirección</label>
                         <input type="text" class="form-control"
-                        id="address" name="address" required>
+                        id="addres" name="addres" required>
                     </div>
 
                    
@@ -25,9 +25,10 @@
                         <select name="city" id="city"
                             class="form-control" required>
                             <option value="">Seleccione</option>
-                            <option value="tulua">Tuluá</option>
-                            <option value="buga">Buga</option>
-                            <option value="cali">Cali</option>
+                            @foreach ($cities as $city)
+                                <option value="{{ $city['value'] }}">{{ $city['name'] }}</option>
+                                
+                            @endforeach
     
                         </select>
     
@@ -38,8 +39,14 @@
                     <div class="col-lg-6 mb-4">
                     <label for="observation_id">Observación</label>
                     <select name="observation_id" id="observation_id"
-                        class="form-control" required>
+                        class="form-control" >
                         <option value="">Seleccione</option>
+                        @foreach ($observations as $observation)
+
+                            <option value="{{ $observation['id'] }}">{{ $observation['description'] }}</option>
+                                
+                        @endforeach
+    
 
                     </select>
 
@@ -47,8 +54,14 @@
                     <div class="col-lg-6 mb-4">
                         <label for="causal_id">Causal</label>
                         <select name="causal_id" id="causal_id"
-                            class="form-control" required>
+                            class="form-control">
                             <option value="">Seleccione</option>
+                            @foreach ($causals as $causal)
+                               
+                                <option value="{{ $causal['id'] }}">{{ $causal['description'] }}</option>
+                                
+                            @endforeach
+    
     
                         </select>
     

@@ -5,7 +5,7 @@
     @include('templates.messages')
     <div class="row">
         <div class="col-lg-12 mb-4">
-            <form action="#" method="POST">
+            <form action="{{ route('activity.store') }}" method="POST">
                 @csrf
                 <div class="row form-group">
                     <div class="col-lg-6 mb-4">
@@ -21,23 +21,36 @@
                 </div>
                 <div class="row form-group">
                     <div class="col-lg-6 mb-4">
-                    <label for="technician_id">Técnico</label>
-                    <select name="technician_id" id="technician_id"
-                        class="form-control" required>
-                        <option value="">Seleccione</option>
+                        <label for="technician_id">Técnico</label>
+                        <select name="technician_id" id="technician_id"
+                            class="form-control" required>
+                            <option value="">Seleccione</option>
 
-                    </select>
+                            @foreach ($technicians as $technician)
+                                <option value="{{ $technician['document'] }}">
+                                    {{ $technician['name'] }}
+                                </option>
+                            @endforeach
 
-                    </div>
+                        </select>
+                    
+
+                </div>
                     <div class="col-lg-6 mb-4">
                         <label for="type_id">Tipo</label>
                         <select name="type_id" id="type_id"
                             class="form-control" required>
                             <option value="">Seleccione</option>
+
+                            @foreach ($types as $type)
+                                <option value="{{ $type['id'] }}">
+                                    {{ $type['description'] }}
+                                </option>
+                            @endforeach
     
                         </select>
     
-                        </div>
+                    </div>
                 </div>
 
                 <div class="row form-group">

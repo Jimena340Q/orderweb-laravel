@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\CausalController;
 use App\Http\Controllers\ObservationController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\TechnicianController;
 use App\Http\Controllers\TypeActivityController;
 use Illuminate\Support\Facades\Route;
 
@@ -65,50 +68,49 @@ Route::prefix('type_activity')->group(function(){
  });
 
 
+Route::prefix('technician')->group(function(){
 
-Route::get('/activity/create', function () {
-    return view('activity.create');
-})->name('activity.create');
-
-
-Route::get('/activity/index', function () {
-    return view('activity.index');
-})->name('activity.index');
-
-Route::get('/activity/edit', function () {
-    return view('activity.edit');
-})->name('activity.edit');
+    Route::get('/index' , [TechnicianController::class, 'index'])->name('technician.index');
+    Route::get('/create' , [TechnicianController::class, 'create'])->name('technician.create');
+    Route::get('/edit/{document}' , [TechnicianController::class, 'edit'])->name('technician.edit');
+    Route::post('/create' , [TechnicianController::class, 'store'])->name('technician.store'); //El post es para almacenar los datos en la store
+    Route::put('/edit/{document}' , [TechnicianController::class, 'update'])->name('technician.update'); //El put es para actualizar y editar
+    Route::get('/destroy/{document}' , [TechnicianController::class, 'destroy'])->name('technician.destroy');
+ 
+});
 
 
+Route::prefix('activity')->group(function(){
+
+    Route::get('/index' , [ActivityController::class, 'index'])->name('activity.index');
+    Route::get('/create' , [ActivityController::class, 'create'])->name('activity.create');
+    Route::get('/edit/{id}' , [ActivityController::class, 'edit'])->name('activity.edit');
+    Route::post('/create' , [ActivityController::class, 'store'])->name('activity.store'); //El post es para almacenar los datos en la store
+    Route::put('/edit/{id}' , [ActivityController::class, 'update'])->name('activity.update'); //El put es para actualizar y editar
+    Route::get('/destroy/{id}' , [ActivityController::class, 'destroy'])->name('activity.destroy');
+ 
+});
+
+Route::prefix('order')->group(function(){
+
+    Route::get('/index' , [OrderController::class, 'index'])->name('order.index');
+    Route::get('/create' , [OrderController::class, 'create'])->name('order.create');
+    Route::get('/edit/{id}' , [OrderController::class, 'edit'])->name('order.edit');
+    Route::post('/create' , [OrderController::class, 'store'])->name('order.store'); //El post es para almacenar los datos en la store
+    Route::put('/edit/{id}' , [OrderController::class, 'update'])->name('order.update'); //El put es para actualizar y editar
+    Route::get('/destroy/{id}' , [OrderController::class, 'destroy'])->name('order.destroy');
+    Route::get('/add_activity/{order_id}/{activity_id}', [OrderController::class, 'add_activity'])->name('order.add_activity');
+    Route::get('/remove_activity/{order_id}/{activity_id}', [OrderController::class, 'remove_activity'])->name('order.remove_activity');
+ 
+});
 
 
-Route::get('/technician/create', function () {
-    return view('technician.create');
-})->name('technician.create');
-
-
-Route::get('/technician/index', function () {
-    return view('technician.index');
-})->name('technician.index');
-
-Route::get('/technician/edit', function () {
-    return view('technician.edit');
-})->name('technician.edit');
 
 
 
 
-Route::get('/order/create', function () {
-    return view('order.create');
-})->name('order.create');
 
 
-Route::get('/order/index', function () {
-    return view('order.index');
-})->name('order.index');
 
-Route::get('/order/edit', function () {
-    return view('order.edit');
-})->name('order.edit');
 
 

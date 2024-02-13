@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('order', function (Blueprint $table) {
             $table->id();
             $table->date('legalization_date')->comment('fecha legalización');
-            $table->string('address', 50)->comment('direccion');
+            $table->string('addres', 50)->comment('direccion');
             $table->string('city', 50)->comment('cuidad');
             $table->foreignId('observation_id')->nullable()->constrained('observation')
                     ->onDelete('cascade')

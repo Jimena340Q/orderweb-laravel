@@ -14,7 +14,6 @@
             <table id="table_data" class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th>Id</th>
                         <th>Documento</th>
                         <th>Nombre</th>
                         <th>Especialidad</th>
@@ -23,22 +22,24 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>1026204589</td>
-                        <td>Antoine Petit</td>
-                        <td>Instalacion de redes</td>
-                        <td>323 5986478</td>
-                       
+
+                    @foreach ($technicians as $technician)
+                        
+                        <tr>
+                                <td>{{ $technician['document'] }}</td>
+                                <td>{{ $technician['name'] }}</td>
+                                <td>{{ $technician['especiality'] }}</td>
+                                <td>{{ $technician['phone'] }}</td>                       
                         <td>
-                            <a href="#" title="editar" class="btn btn-info btn-circle btn-sm">
-                                <i class="far fa-edit"></i>
-                            </a>
-                            <a href="#" title="eliminar" class="btn btn-danger btn-circle btn-sm" onclick="return remove();">
-                                <i class="fas fa-trash"></i>
-                            </a>
+                                <a href="{{ route('technician.edit' , $technician ['document']) }}" title="editar" class="btn btn-info btn-circle btn-sm">
+                                    <i class="far fa-edit"></i>
+                                </a>
+                                <a href="{{ route('technician.destroy' , $technician ['document']) }}" title="eliminar" class="btn btn-danger btn-circle btn-sm" onclick="return remove();">
+                                    <i class="fas fa-trash"></i>
+                                </a>
                         </td>
-                    </tr>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
 
