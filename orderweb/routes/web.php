@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [AuthController::class, 'index']);
 
-Route::get('/index', function () {
+Route::middleware('auth')->get('/index', function () {
     return view('index');
 })->name('index');
 
@@ -36,11 +36,13 @@ Route::prefix('auth')->group(function(){
     Route::get('/index' , [AuthController::class, 'index'])->name('auth.index');
     Route::post('/login' , [AuthController::class, 'login'])->name('auth.login');
     Route::get('/logout' , [AuthController::class, 'logout'])->name('auth.logout');
+    Route::get('/register' , [AuthController::class, 'create'])->name('auth.register');
+    Route::post('/register' , [AuthController::class, 'store'])->name('auth.store');
  
  });
 
 
-Route::prefix('causal')->group(function(){
+Route::middleware(['auth' , 'can:administrador'])->prefix('causal')->group(function(){
 
    Route::get('/index' , [CausalController::class, 'index'])->name('causal.index');
    Route::get('/create' , [CausalController::class, 'create'])->name('causal.create');
@@ -53,7 +55,7 @@ Route::prefix('causal')->group(function(){
 
 
 
-Route::prefix('observation')->group(function(){
+Route::middleware(['auth' , 'can:administrador'])->prefix('observation')->group(function(){
 
     Route::get('/index' , [ObservationController::class, 'index'])->name('observation.index');
     Route::get('/create' , [ObservationController::class, 'create'])->name('observation.create');
@@ -67,7 +69,7 @@ Route::prefix('observation')->group(function(){
 
 
 
-Route::prefix('type_activity')->group(function(){
+Route::middleware(['auth' , 'can:administrador'])->prefix('type_activity')->group(function(){
 
     Route::get('/index' , [TypeActivityController::class, 'index'])->name('type_activity.index');
     Route::get('/create' , [TypeActivityController::class, 'create'])->name('type_activity.create');
@@ -79,7 +81,7 @@ Route::prefix('type_activity')->group(function(){
  });
 
 
-Route::prefix('technician')->group(function(){
+Route::middleware(['auth' , 'can:supervisor'])->prefix('technician')->group(function(){
 
     Route::get('/index' , [TechnicianController::class, 'index'])->name('technician.index');
     Route::get('/create' , [TechnicianController::class, 'create'])->name('technician.create');
@@ -91,7 +93,7 @@ Route::prefix('technician')->group(function(){
 });
 
 
-Route::prefix('activity')->group(function(){
+Route::middleware(['auth' , 'can:admin-supervisor'])->prefix('activity')->group(function(){
 
     Route::get('/index' , [ActivityController::class, 'index'])->name('activity.index');
     Route::get('/create' , [ActivityController::class, 'create'])->name('activity.create');
@@ -102,7 +104,7 @@ Route::prefix('activity')->group(function(){
  
 });
 
-Route::prefix('order')->group(function(){
+Route::middleware(['auth' , 'can:admin-supervisor'])->prefix('order')->group(function(){
 
     Route::get('/index' , [OrderController::class, 'index'])->name('order.index');
     Route::get('/create' , [OrderController::class, 'create'])->name('order.create');
