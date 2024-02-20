@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CausalController;
 use App\Http\Controllers\ObservationController;
 use App\Http\Controllers\OrderController;
@@ -19,14 +20,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', [AuthController::class, 'index']);
+
+Route::get('/index', function () {
     return view('index');
 })->name('index');
 
-Route::get('/test2', function () {
+/* Route::get('/test2', function () {
     return view('test2');
-})->name('test2');
+})->name('test2'); */
 
+
+Route::prefix('auth')->group(function(){
+
+    Route::get('/index' , [AuthController::class, 'index'])->name('auth.index');
+    Route::post('/login' , [AuthController::class, 'login'])->name('auth.login');
+    Route::get('/logout' , [AuthController::class, 'logout'])->name('auth.logout');
+ 
+ });
 
 
 Route::prefix('causal')->group(function(){
