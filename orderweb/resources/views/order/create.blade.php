@@ -26,6 +26,7 @@
                             class="form-control" required>
                             <option value="">Seleccione</option>
                             @foreach ($cities as $city)
+                            
                                 <option value="{{ $city['value'] }}">{{ $city['name'] }}</option>
                                 
                             @endforeach

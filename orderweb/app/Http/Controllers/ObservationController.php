@@ -4,9 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Observation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ObservationController extends Controller
 {
+    private $rules = [
+        'description' => 'required|string|max:50|min:3',
+    ];
+    private $traductionAttributes = [
+        'description' => 'descripcion',
+    ];
     /**
      * Display a listing of the resource.
      */
@@ -31,6 +38,13 @@ class ObservationController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), $this->rules);
+        $validator->setAttributeNames($this->traductionAttributes);
+        if($validator->fails())
+        {
+            $errors = $validator->errors();
+            return redirect()->route('observation.create')->withInput()->withErrors($errors);
+        }
         $observation = Observation::create($request->all());
         session()->flash('message', 'Registro creado exitosamente');
         return redirect()->route('observation.index');
@@ -65,6 +79,13 @@ class ObservationController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $validator = Validator::make($request->all(), $this->rules);
+        $validator->setAttributeNames($this->traductionAttributes);
+        if($validator->fails())
+        {
+            $errors = $validator->errors();
+            return redirect()->route('observation.edit', $id)->withInput()->withErrors($errors);
+        }
         $observation = Observation::find($id);
         if($observation)
         {

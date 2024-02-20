@@ -12,12 +12,14 @@
                     <div class="col-lg-6 mb-4">
                         <label for="description">Descripción</label>
                         <input type="text" class="form-control"
-                        id="description" name="description" required value="{{ $activity['description'] }}">
+                        id="description" name="description" required 
+                        value="{{ $activity['description'] }}">
                     </div>
                     <div class="col-lg-6 mb-4">
                         <label for="hours">Horas estimadas</label>
                         <input type="number" class="form-control"
-                        id="hours" name="hours" required value="{{ $activity['hours'] }}" >
+                        id="hours" name="hours" required 
+                        value="{{ $activity['hours'] }}" >
                     </div>
                 </div>
                 <div class="row form-group">
@@ -44,7 +46,7 @@
 
                             @foreach ($types as $type)
                                 <option value="{{ $type['id'] }}" 
-                                @if($type['id'] == $activity['type_id']) selected @endif  >
+                                @if($type['id'] == $activity['type_id']) selected @endif >
                                     {{ $type['description'] }}
                                 </option>
                             @endforeach

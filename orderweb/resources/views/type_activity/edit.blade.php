@@ -7,6 +7,7 @@
         <div class="col-lg-12 mb-4">
             <form action="#" method="POST">
                 @csrf
+                @method('PUT')
                 <div class="row form-group">
                     <div class="col-lg-12 mb-4">
                         <label for="description">Descripción</label>
