@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CausalController;
 use App\Http\Controllers\ObservationController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\TechnicianController;
 use App\Http\Controllers\TypeActivityController;
 use Illuminate\Support\Facades\Route;
@@ -114,6 +115,17 @@ Route::middleware(['auth' , 'can:admin-supervisor'])->prefix('order')->group(fun
     Route::get('/destroy/{id}' , [OrderController::class, 'destroy'])->name('order.destroy');
     Route::get('/add_activity/{order_id}/{activity_id}', [OrderController::class, 'add_activity'])->name('order.add_activity');
     Route::get('/remove_activity/{order_id}/{activity_id}', [OrderController::class, 'remove_activity'])->name('order.remove_activity');
+ 
+});
+
+
+Route::middleware(['auth' , 'can:administrador'])->prefix('reports')->group(function(){
+
+    Route::get('/index' , [ReportController::class, 'index'])->name('reports.index');
+    Route::get('/export_technicians' , [ReportController::class, 'export_technicians'])->name('reports.technicians');
+    Route::get('/export_users' , [ReportController::class, 'export_users'])->name('reports.users');
+    Route::post('/export_activities_by_technician' , [ReportController::class, 'export_activities_by_technician'])->name('reports.activities_technician');
+    Route::post('/export_orders' , [ReportController::class, 'export_orders'])->name('reports.orders');
  
 });
 
